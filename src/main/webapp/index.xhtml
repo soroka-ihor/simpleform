@@ -1,0 +1,89 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <h:outputStylesheet  name="vendor/bootstrap/css/bootstrap.min.css"/>
+    <h:outputStylesheet  name="fonts/font-awesome-4.7.0/css/font-awesome.min.css"/>
+    <h:outputStylesheet  name="vendor/animate/animate.css"/>
+    <h:outputStylesheet  name="vendor/css-hamburgers/hamburgers.min.css"/>
+    <h:outputStylesheet  name="vendor/select2/select2.min.css"/>
+    <h:outputStylesheet  name="css/util.css"/>
+    <h:outputStylesheet  name="css/main.css"/>
+</h:head>
+
+<h:body>
+    <div class="contact1">
+        <div class="container-contact1">
+            <div class="contact1-pic js-tilt">
+                <p:graphicImage name="images/img-01.png" alt="image"/>
+            </div>
+
+            <h:form id="feedback-form" styleClass="contact1-form validate-form">
+
+                <p:growl id="message" showDetail="true"/>
+
+                <h:outputText value="Leave your contact" styleClass="contact1-form-title"/>
+
+                <div class="wrap-input1 validate-input" data-validate = "First name is required">
+                    <p:inputText id="name" styleClass="input1" placeholder="First name" required="true" requiredMessage="First name is required" value="#{feedback.firstName}">
+                        <f:validateLength minimum="2"/>
+                    </p:inputText>
+                    <span class="shadow-input1"></span>
+                </div>
+
+                <div class="wrap-input1 validate-input" data-validate = "Last name is required">
+                    <p:inputText id="firstname" styleClass="input1" placeholder="Last name" required="true" requiredMessage="Last name is required" value="#{feedback.lastName}">
+                        <f:validateLength minimum="2"/>
+                    </p:inputText>
+                    <span class="shadow-input1"></span>
+                </div>
+
+                <div class="wrap-input1 validate-input" data-validate = "Contact is required">
+                    <p:inputText id="contact" styleClass="input1" placeholder="Contact" required="true" requiredMessage="Leave your contact information" value="#{feedback.contactText}">
+                        <f:validateLength minimum="4"/>
+                    </p:inputText>
+                    <span class="shadow-input1"></span>
+                </div>
+
+                <div class="wrap-input1 validate-input" data-validate = "Email is required">
+                    <p:inputText id="email" styleClass="input1" placeholder="Email" required="true" requiredMessage="Email is required" value="#{feedback.email}"
+                    match="confirmemail">
+                        <f:validator validatorId="emailValidator"/>
+                    </p:inputText>
+                    <span class="shadow-input1"></span>
+                </div>
+
+                <div class="wrap-input1 validate-input" data-validate = "Confirm email">
+                    <p:inputText id="confirmemail" styleClass="input1" placeholder="Confirm email" required="true" requiredMessage="You didn't confirm your email"
+                                 value="#{feedback.emailConfirm}">
+                        <f:attribute name="email-confirm" value="value"/>
+                    </p:inputText>
+                    <span class="shadow-input1"></span>
+                </div>
+
+                <p:captcha label="Captcha"/>
+
+                <div class="container-contact1-form-btn">
+                    <p:commandButton styleClass="contact1-form-btn" value="Send" update="@form" action="#{feedBackController.process(feedback)}">
+
+                    </p:commandButton>
+                </div>
+
+            </h:form>
+        </div>
+    </div>
+
+    <script src="resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="resources/vendor/bootstrap/js/popper.js"></script>
+    <script src="resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="resources/vendor/select2/select2.min.js"></script>
+    <script src="resources/vendor/tilt/tilt.jquery.min.js"></script>
+    <script >
+        $('.js-tilt').tilt({
+            scale: 1.1
+        })
+    </script>
+    <script src="js/main.js"></script>
+</h:body>
+</html>
